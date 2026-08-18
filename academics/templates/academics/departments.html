@@ -1,0 +1,196 @@
+{% extends "academics/base.html" %}
+
+
+{% block title %}
+Departments
+{% endblock %}
+
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+
+        <h1 class="page-title">
+            Departments
+        </h1>
+
+        <p class="page-description">
+            Manage university departments and their information.
+        </p>
+
+    </div>
+
+
+    <div>
+
+        <a href="{% url 'department_create' %}" class="btn btn-primary">
+            + Add Department
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     DEPARTMENT TABLE
+     ===================================================== -->
+
+<div class="table-container">
+
+    <table class="data-table">
+
+        <thead>
+
+            <tr>
+
+                <th>#</th>
+
+                <th>Department Name</th>
+
+                <th>Code</th>
+
+                <th>Description</th>
+
+                <th>Actions</th>
+
+            </tr>
+
+        </thead>
+
+
+        <tbody>
+
+            {% for department in departments %}
+
+            <tr>
+
+                <!-- Serial Number -->
+
+                <td>
+                    {{ forloop.counter }}
+                </td>
+
+
+                <!-- Department Name -->
+
+                <td>
+
+                    <strong>
+                        {{ department.name }}
+                    </strong>
+
+                </td>
+
+
+                <!-- Department Code -->
+
+                <td>
+
+                    <span class="badge">
+                        {{ department.code }}
+                    </span>
+
+                </td>
+
+
+                <!-- Description -->
+
+                <td>
+
+                    {% if department.description %}
+
+                        {{ department.description }}
+
+                    {% else %}
+
+                        <span>
+                            No description available
+                        </span>
+
+                    {% endif %}
+
+                </td>
+
+
+                <!-- Actions -->
+
+                <td>
+
+                    <div class="action-buttons">
+
+                        <!-- EDIT -->
+
+                        <a
+                            href="{% url 'department_edit' department.pk %}"
+                            class="btn btn-edit"
+                        >
+                            Edit
+                        </a>
+
+
+                        <!-- DELETE -->
+
+                        <a
+                            href="{% url 'department_delete' department.pk %}"
+                            class="btn btn-delete"
+                            onclick="return confirm(
+                                'Are you sure you want to delete this department?'
+                            );"
+                        >
+                            Delete
+                        </a>
+
+                    </div>
+
+                </td>
+
+            </tr>
+
+
+            {% empty %}
+
+            <!-- =================================================
+                 NO DEPARTMENTS
+                 ================================================= -->
+
+            <tr>
+
+                <td colspan="5">
+
+                    <div class="empty-state">
+
+                        <h3>
+                            No Departments Found
+                        </h3>
+
+                        <p>
+                            No departments have been added yet.
+                        </p>
+
+
+                        <a
+                            href="{% url 'department_create' %}"
+                            class="btn btn-primary"
+                        >
+                            + Add First Department
+                        </a>
+
+                    </div>
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,88 @@
+{% extends "academics/base.html" %}
+
+
+{% block title %}
+Semesters
+{% endblock %}
+
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+
+        <h1 class="page-title">
+            Semesters
+        </h1>
+
+        <p class="page-description">
+            Manage semesters and academic years.
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="table-container">
+
+    <table class="data-table">
+
+        <thead>
+
+            <tr>
+
+                <th>ID</th>
+                <th>Department</th>
+                <th>Semester</th>
+                <th>Academic Year</th>
+
+            </tr>
+
+        </thead>
+
+
+        <tbody>
+
+            {% for semester in semesters %}
+
+            <tr>
+
+                <td>
+                    {{ semester.id }}
+                </td>
+
+                <td>
+                    {{ semester.department.name }}
+                </td>
+
+                <td>
+                    Semester {{ semester.number }}
+                </td>
+
+                <td>
+                    {{ semester.academic_year }}
+                </td>
+
+            </tr>
+
+            {% empty %}
+
+            <tr>
+
+                <td colspan="4">
+                    No semesters available.
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}

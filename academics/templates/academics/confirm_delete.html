@@ -1,0 +1,66 @@
+{% extends "academics/base.html" %}
+
+
+{% block title %}
+Delete {{ object_type }}
+{% endblock %}
+
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+
+        <h1 class="page-title">
+            Delete {{ object_type }}
+        </h1>
+
+        <p class="page-description">
+            Please confirm this action.
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="form-container">
+
+    <p>
+        Are you sure you want to delete:
+    </p>
+
+    <br>
+
+    <h3>
+        {{ object }}
+    </h3>
+
+    <br>
+
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <button
+            type="submit"
+            class="btn btn-danger"
+        >
+            Yes, Delete
+        </button>
+
+
+        <a
+            href="{% url 'departments' %}"
+            class="btn btn-secondary"
+        >
+            Cancel
+        </a>
+
+    </form>
+
+</div>
+
+{% endblock %}

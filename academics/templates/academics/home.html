@@ -1,0 +1,104 @@
+{% extends "academics/base.html" %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+        <h1 class="page-title">
+            Dashboard
+        </h1>
+
+        <p class="page-description">
+            University Examination & Academic Management System
+        </p>
+    </div>
+
+</div>
+
+
+<div class="dashboard-grid">
+
+    <!-- Departments -->
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            Departments
+        </div>
+
+        <div class="card-number">
+            {{ department_count }}
+        </div>
+
+    </div>
+
+
+    <!-- Semesters -->
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            Semesters
+        </div>
+
+        <div class="card-number">
+            {{ semester_count }}
+        </div>
+
+    </div>
+
+
+    <!-- Subjects -->
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            Subjects
+        </div>
+
+        <div class="card-number">
+            {{ subject_count }}
+        </div>
+
+    </div>
+
+
+    <!-- Professors -->
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            Professors
+        </div>
+
+        <div class="card-number">
+            {{ professor_count }}
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="table-container">
+
+    <h2>
+        Version 1 - Academic Structure
+    </h2>
+
+    <br>
+
+    <p>
+        Version 1 manages the academic structure of the university,
+        including departments, semesters, subjects and professors.
+    </p>
+
+</div>
+
+{% endblock %}

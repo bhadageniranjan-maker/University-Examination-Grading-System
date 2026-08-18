@@ -1,0 +1,107 @@
+{% extends "academics/base.html" %}
+
+
+{% block title %}
+Professors
+{% endblock %}
+
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+
+        <h1 class="page-title">
+            Professors
+        </h1>
+
+        <p class="page-description">
+            Manage professors and their assigned subjects.
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="table-container">
+
+    <table class="data-table">
+
+        <thead>
+
+            <tr>
+
+                <th>Name</th>
+                <th>Employee ID</th>
+                <th>Email</th>
+                <th>Department</th>
+                <th>Subjects</th>
+
+            </tr>
+
+        </thead>
+
+
+        <tbody>
+
+            {% for professor in professors %}
+
+            <tr>
+
+                <td>
+                    {{ professor.name }}
+                </td>
+
+                <td>
+                    {{ professor.employee_id }}
+                </td>
+
+                <td>
+                    {{ professor.email }}
+                </td>
+
+                <td>
+                    {{ professor.department.name }}
+                </td>
+
+                <td>
+
+                    {% for subject in professor.subjects.all %}
+
+                        {{ subject.name }}
+
+                        {% if not forloop.last %}
+                            ,
+                        {% endif %}
+
+                    {% empty %}
+
+                        No subjects assigned.
+
+                    {% endfor %}
+
+                </td>
+
+            </tr>
+
+            {% empty %}
+
+            <tr>
+
+                <td colspan="5">
+                    No professors available.
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}
