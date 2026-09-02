@@ -1,97 +1,236 @@
 {% load static %}
 
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>{% block title %}University Examination System{% endblock %}</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <link rel="stylesheet" href="{% static 'academics/css/style.css' %}">
+    <title>
+
+        {% block title %}
+        University Examination System
+        {% endblock %}
+
+    </title>
+
+
+    <link
+        rel="stylesheet"
+        href="{% static 'academics/css/style.css' %}"
+    >
+
 </head>
+
 
 <body>
 
-    <!-- Top Navigation Bar -->
-    <header class="topbar">
 
-        <div class="logo">
-            University Examination System
-        </div>
+<!-- =====================================================
+     TOP BAR
+     ===================================================== -->
 
-        <div class="topbar-right">
-            <span>Academic Management</span>
-        </div>
-
-    </header>
+<header class="topbar">
 
 
-    <!-- Main Layout -->
-    <div class="layout">
+    <div class="logo">
 
-        <!-- Sidebar -->
-        <aside class="sidebar">
-
-            <div class="sidebar-title">
-                MAIN MENU
-            </div>
-
-            <a href="{% url 'home' %}" class="nav-link">
-                Dashboard
-            </a>
-
-            <a href="{% url 'departments' %}" class="nav-link">
-                Departments
-            </a>
-
-            <a href="{% url 'semesters' %}" class="nav-link">
-                Semesters
-            </a>
-
-            <a href="{% url 'subjects' %}" class="nav-link">
-                Subjects
-            </a>
-
-            <a href="{% url 'professors' %}" class="nav-link">
-                Professors
-            </a>
-
-            <div class="sidebar-title">
-                ADMINISTRATION
-            </div>
-
-            <a href="/admin/" class="nav-link">
-                Django Admin
-            </a>
-
-        </aside>
-
-
-        <!-- Main Content -->
-        <main class="main-content">
-
-            {% block content %}
-
-            {% endblock %}
-
-        </main>
+        University Examination System
 
     </div>
 
 
-    <!-- Footer -->
-    <footer class="footer">
+    <div class="topbar-right">
 
-        <p>
-            University Examination & Grading System
-        </p>
 
-        <p>
-            Version 1.0
-        </p>
+        {% if user.is_authenticated %}
 
-    </footer>
+            <span class="welcome-text">
+
+                Welcome,
+                <strong>
+                    {{ user.username }}
+                </strong>
+
+            </span>
+
+
+            <form
+                method="POST"
+                action="{% url 'logout' %}"
+                class="logout-form"
+            >
+
+                {% csrf_token %}
+
+                <button
+                    type="submit"
+                    class="logout-button"
+                >
+                    Logout
+                </button>
+
+            </form>
+
+
+        {% else %}
+
+            <a
+                href="{% url 'login' %}"
+                class="login-link"
+            >
+                Login
+            </a>
+
+        {% endif %}
+
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     MAIN LAYOUT
+     ===================================================== -->
+
+<div class="layout">
+
+
+    <!-- =================================================
+         SIDEBAR
+         ================================================= -->
+
+    <aside class="sidebar">
+
+
+        <div class="sidebar-title">
+            MAIN MENU
+        </div>
+
+
+        <!-- Dashboard -->
+
+        <a
+            href="{% url 'home' %}"
+            class="nav-link"
+        >
+            Dashboard
+        </a>
+
+
+        <!-- Departments -->
+
+        <a
+            href="{% url 'departments' %}"
+            class="nav-link"
+        >
+            Departments
+        </a>
+
+
+        <!-- Semesters -->
+
+        <a
+            href="{% url 'semesters' %}"
+            class="nav-link"
+        >
+            Semesters
+        </a>
+
+
+        <!-- Subjects -->
+
+        <a
+            href="{% url 'subjects' %}"
+            class="nav-link"
+        >
+            Subjects
+        </a>
+
+
+        <!-- Professors -->
+
+        <a
+            href="{% url 'professors' %}"
+            class="nav-link"
+        >
+            Professors
+        </a>
+
+
+        <!-- =================================================
+             VERSION 2
+             ROOMS
+             ================================================= -->
+
+        <a
+            href="{% url 'rooms' %}"
+            class="nav-link"
+        >
+            Rooms
+        </a>
+
+
+        <!-- =================================================
+             VERSION 2
+             EXAMS
+             ================================================= -->
+
+        <a
+            href="{% url 'exams' %}"
+            class="nav-link"
+        >
+            Exams
+        </a>
+
+
+    </aside>
+
+
+
+    <!-- =================================================
+         MAIN CONTENT
+         ================================================= -->
+
+    <main class="main-content">
+
+        {% block content %}
+
+        {% endblock %}
+
+    </main>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     FOOTER
+     ===================================================== -->
+
+<footer class="footer">
+
+    <p>
+        University Examination & Grading System
+    </p>
+
+    <p>
+        Version 2.0
+    </p>
+
+</footer>
+
 
 </body>
+
 </html>

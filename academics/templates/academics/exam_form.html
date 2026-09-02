@@ -1,0 +1,203 @@
+{% extends "academics/base.html" %}
+
+
+{% block title %}
+{{ page_title }}
+{% endblock %}
+
+
+{% block content %}
+
+
+<!-- =====================================================
+     PAGE HEADER
+     ===================================================== -->
+
+<div class="page-header">
+
+    <div>
+
+        <h1 class="page-title">
+            {{ page_title }}
+        </h1>
+
+        <p class="page-description">
+            {{ page_description }}
+        </p>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     EXAM FORM
+     ===================================================== -->
+
+<div class="form-container">
+
+
+    <!-- =================================================
+         FORM ERRORS
+         ================================================= -->
+
+    {% if form.non_field_errors %}
+
+        <div class="form-errors">
+
+            <strong>
+                Please fix the following:
+            </strong>
+
+            {{ form.non_field_errors }}
+
+        </div>
+
+    {% endif %}
+
+
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+
+        <!-- =============================================
+             SUBJECT
+             ============================================= -->
+
+        <div class="form-group">
+
+            <label for="{{ form.subject.id_for_label }}">
+                Subject
+            </label>
+
+            {{ form.subject }}
+
+            {{ form.subject.errors }}
+
+        </div>
+
+
+
+        <!-- =============================================
+             ROOM
+             ============================================= -->
+
+        <div class="form-group">
+
+            <label for="{{ form.room.id_for_label }}">
+                Examination Room
+            </label>
+
+            {{ form.room }}
+
+            {{ form.room.errors }}
+
+        </div>
+
+
+
+        <!-- =============================================
+             EXAM DATE
+             ============================================= -->
+
+        <div class="form-group">
+
+            <label for="{{ form.exam_date.id_for_label }}">
+                Examination Date
+            </label>
+
+            {{ form.exam_date }}
+
+            {{ form.exam_date.errors }}
+
+        </div>
+
+
+
+        <!-- =============================================
+             START TIME
+             ============================================= -->
+
+        <div class="form-group">
+
+            <label for="{{ form.start_time.id_for_label }}">
+                Start Time
+            </label>
+
+            {{ form.start_time }}
+
+            {{ form.start_time.errors }}
+
+        </div>
+
+
+
+        <!-- =============================================
+             END TIME
+             ============================================= -->
+
+        <div class="form-group">
+
+            <label for="{{ form.end_time.id_for_label }}">
+                End Time
+            </label>
+
+            {{ form.end_time }}
+
+            {{ form.end_time.errors }}
+
+        </div>
+
+
+
+        <!-- =============================================
+             STUDENT COUNT
+             ============================================= -->
+
+        <div class="form-group">
+
+            <label for="{{ form.student_count.id_for_label }}">
+                Student Count
+            </label>
+
+            {{ form.student_count }}
+
+            {{ form.student_count.errors }}
+
+        </div>
+
+
+
+        <!-- =============================================
+             BUTTONS
+             ============================================= -->
+
+        <div class="action-buttons">
+
+            <button
+                type="submit"
+                class="btn btn-primary"
+            >
+                Save Examination
+            </button>
+
+
+            <a
+                href="{% url 'exams' %}"
+                class="btn btn-secondary"
+            >
+                Cancel
+            </a>
+
+        </div>
+
+
+    </form>
+
+</div>
+
+
+{% endblock %}

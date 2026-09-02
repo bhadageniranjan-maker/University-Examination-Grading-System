@@ -1,0 +1,248 @@
+{% extends "academics/base.html" %}
+
+
+{% block title %}
+Rooms | University Examination System
+{% endblock %}
+
+
+{% block content %}
+
+
+<!-- =====================================================
+     PAGE HEADER
+     ===================================================== -->
+
+<div class="page-header">
+
+    <div>
+
+        <h1 class="page-title">
+            Examination Rooms
+        </h1>
+
+        <p class="page-description">
+            Manage examination halls and room capacities
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     ROOM SUMMARY
+     ===================================================== -->
+
+<div class="dashboard-grid">
+
+
+    <!-- Total Rooms -->
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            Total Rooms
+        </div>
+
+        <div class="card-number">
+            {{ rooms|length }}
+        </div>
+
+    </div>
+
+
+    <!-- Total Seating Capacity -->
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            Total Seating Capacity
+        </div>
+
+        <div class="card-number">
+            {{ total_capacity }}
+        </div>
+
+    </div>
+
+
+    <!-- Version -->
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            Module
+        </div>
+
+        <div class="card-number">
+            V2
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<!-- =====================================================
+     AVAILABLE ROOMS
+     ===================================================== -->
+
+<div class="content-card">
+
+
+    <div class="section-header">
+
+        <div>
+
+            <h2>
+                Available Examination Rooms
+            </h2>
+
+            <p>
+                Rooms available for examination scheduling
+            </p>
+
+        </div>
+
+    </div>
+
+
+    {% if rooms %}
+
+
+        <div class="room-grid">
+
+
+            {% for room in rooms %}
+
+
+                <div class="room-card">
+
+
+                    <!-- ROOM HEADER -->
+
+                    <div class="room-card-header">
+
+                        <div class="room-icon">
+                            🏫
+                        </div>
+
+
+                        <div>
+
+                            <h3>
+                                Room {{ room.room_number }}
+                            </h3>
+
+                            <p>
+                                {{ room.building }}
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ROOM DETAILS -->
+
+                    <div class="room-details">
+
+
+                        <div class="room-detail">
+
+                            <span class="detail-label">
+                                Room Number
+                            </span>
+
+                            <span class="detail-value">
+                                {{ room.room_number }}
+                            </span>
+
+                        </div>
+
+
+                        <div class="room-detail">
+
+                            <span class="detail-label">
+                                Building
+                            </span>
+
+                            <span class="detail-value">
+                                {{ room.building }}
+                            </span>
+
+                        </div>
+
+
+                        <div class="room-detail">
+
+                            <span class="detail-label">
+                                Capacity
+                            </span>
+
+                            <span class="detail-value">
+                                {{ room.capacity }} seats
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <!-- STATUS -->
+
+                    <div class="capacity-status">
+
+                        <span class="status-dot"></span>
+
+                        Available for Scheduling
+
+                    </div>
+
+
+                </div>
+
+
+            {% endfor %}
+
+
+        </div>
+
+
+    {% else %}
+
+
+        <!-- NO ROOMS -->
+
+        <div class="empty-state">
+
+            <div class="empty-icon">
+                🏫
+            </div>
+
+            <h2>
+                No Examination Rooms Available
+            </h2>
+
+            <p>
+                No rooms have been added to the system yet.
+            </p>
+
+            <p class="empty-help">
+                Add rooms from the Django Admin panel
+                before scheduling examinations.
+            </p>
+
+        </div>
+
+
+    {% endif %}
+
+
+</div>
+
+
+{% endblock %}

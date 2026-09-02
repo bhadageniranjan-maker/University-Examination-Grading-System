@@ -1,0 +1,253 @@
+{% extends "academics/base.html" %}
+
+
+{% block title %}
+Examination Timetable
+{% endblock %}
+
+
+{% block content %}
+
+
+<!-- =====================================================
+     PAGE HEADER
+     ===================================================== -->
+
+<div class="page-header">
+
+    <div>
+
+        <h1 class="page-title">
+            Examination Timetable
+        </h1>
+
+        <p class="page-description">
+            University examination schedule and room allocation
+        </p>
+
+    </div>
+
+
+    <div class="timetable-actions">
+
+        <a
+            href="{% url 'exams' %}"
+            class="btn btn-secondary"
+        >
+            ← Back to Exams
+        </a>
+
+
+        <a
+            href="{% url 'exam_create' %}"
+            class="btn btn-primary"
+        >
+            + Schedule Exam
+        </a>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     TIMETABLE
+     ===================================================== -->
+
+<div class="timetable-container">
+
+
+    {% if exams %}
+
+
+        <div class="timetable-header">
+
+            <div>
+                Examination Schedule
+            </div>
+
+            <div>
+                {{ exams|length }} Examination{{ exams|length|pluralize }}
+            </div>
+
+        </div>
+
+
+
+        <div class="timetable-list">
+
+
+            {% for exam in exams %}
+
+
+                <div class="timetable-card">
+
+
+                    <!-- =================================
+                         DATE
+                         ================================= -->
+
+                    <div class="timetable-date">
+
+                        <div class="date-label">
+                            EXAM DATE
+                        </div>
+
+                        <div class="date-value">
+                            {{ exam.exam_date|date:"d" }}
+                        </div>
+
+                        <div class="month-value">
+                            {{ exam.exam_date|date:"M Y" }}
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- =================================
+                         EXAM INFORMATION
+                         ================================= -->
+
+                    <div class="timetable-details">
+
+
+                        <div class="exam-subject">
+
+                            <h2>
+                                {{ exam.subject.name }}
+                            </h2>
+
+                            <span class="subject-code">
+                                {{ exam.subject.code }}
+                            </span>
+
+                        </div>
+
+
+                        <div class="exam-info-row">
+
+
+                            <div class="exam-info-item">
+
+                                <span class="info-label">
+                                    TIME
+                                </span>
+
+                                <span class="info-value">
+                                    {{ exam.start_time|time:"h:i A" }}
+                                    -
+                                    {{ exam.end_time|time:"h:i A" }}
+                                </span>
+
+                            </div>
+
+
+                            <div class="exam-info-item">
+
+                                <span class="info-label">
+                                    ROOM
+                                </span>
+
+                                <span class="info-value">
+                                    {{ exam.room.room_number }}
+                                </span>
+
+                            </div>
+
+
+                            <div class="exam-info-item">
+
+                                <span class="info-label">
+                                    BUILDING
+                                </span>
+
+                                <span class="info-value">
+                                    {{ exam.room.building }}
+                                </span>
+
+                            </div>
+
+
+                            <div class="exam-info-item">
+
+                                <span class="info-label">
+                                    STUDENTS
+                                </span>
+
+                                <span class="info-value">
+                                    {{ exam.student_count }}
+                                </span>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- =================================
+                         STATUS
+                         ================================= -->
+
+                    <div class="exam-status">
+
+                        <span class="status-badge">
+                            Scheduled
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+            {% endfor %}
+
+
+        </div>
+
+
+    {% else %}
+
+
+        <!-- =============================================
+             EMPTY STATE
+             ============================================= -->
+
+        <div class="timetable-empty">
+
+            <div class="empty-icon">
+                📅
+            </div>
+
+            <h2>
+                No Examinations Scheduled
+            </h2>
+
+            <p>
+                There are currently no examinations
+                in the timetable.
+            </p>
+
+
+            <a
+                href="{% url 'exam_create' %}"
+                class="btn btn-primary"
+            >
+                + Schedule First Examination
+            </a>
+
+        </div>
+
+
+    {% endif %}
+
+
+</div>
+
+
+{% endblock %}

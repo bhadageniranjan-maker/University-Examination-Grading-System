@@ -1,0 +1,277 @@
+{% extends "academics/base.html" %}
+
+
+{% block title %}
+Examinations
+{% endblock %}
+
+
+{% block content %}
+
+<!-- =====================================================
+     PAGE HEADER
+     ===================================================== -->
+
+<div class="page-header">
+
+    <div>
+
+        <h1 class="page-title">
+            Examination Scheduling
+        </h1>
+
+        <p class="page-description">
+            Manage university examination schedules
+        </p>
+
+    </div>
+
+
+    <div class="timetable-actions">
+
+        <a
+            href="{% url 'exam_timetable' %}"
+            class="btn btn-secondary"
+        >
+            📅 View Timetable
+        </a>
+
+
+        <a
+            href="{% url 'exam_create' %}"
+            class="btn btn-primary"
+        >
+            + Schedule Exam
+        </a>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     EXAM STATISTICS
+     ===================================================== -->
+
+<div class="dashboard-grid">
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            Total Examinations
+        </div>
+
+        <div class="card-number">
+            {{ exams|length }}
+        </div>
+
+    </div>
+
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            Scheduled Exams
+        </div>
+
+        <div class="card-number">
+            {{ exams|length }}
+        </div>
+
+    </div>
+
+
+    <div class="dashboard-card">
+
+        <div class="card-title">
+            Module
+        </div>
+
+        <div class="card-number">
+            V2
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     EXAMINATION LIST
+     ===================================================== -->
+
+<div class="table-container">
+
+    <div class="page-header">
+
+        <div>
+
+            <h2>
+                Examination Schedule
+            </h2>
+
+            <p class="muted-text">
+                All scheduled university examinations
+            </p>
+
+        </div>
+
+    </div>
+
+
+    {% if exams %}
+
+        <table class="data-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Subject
+                    </th>
+
+                    <th>
+                        Room
+                    </th>
+
+                    <th>
+                        Exam Date
+                    </th>
+
+                    <th>
+                        Start Time
+                    </th>
+
+                    <th>
+                        End Time
+                    </th>
+
+                    <th>
+                        Students
+                    </th>
+
+                    <th>
+                        Actions
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for exam in exams %}
+
+                    <tr>
+
+                        <td>
+
+                            <strong>
+                                {{ exam.subject.name }}
+                            </strong>
+
+                            <br>
+
+                            <span class="muted-text">
+                                {{ exam.subject.code }}
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            {{ exam.room.room_number }}
+
+                            <br>
+
+                            <span class="muted-text">
+                                {{ exam.room.building }}
+                            </span>
+
+                        </td>
+
+
+                        <td>
+                            {{ exam.exam_date }}
+                        </td>
+
+
+                        <td>
+                            {{ exam.start_time }}
+                        </td>
+
+
+                        <td>
+                            {{ exam.end_time }}
+                        </td>
+
+
+                        <td>
+                            {{ exam.student_count }}
+                        </td>
+
+
+                        <td>
+
+                            <div class="action-buttons">
+
+                                <a
+                                    href="{% url 'exam_edit' exam.id %}"
+                                    class="edit-btn"
+                                >
+                                    Edit
+                                </a>
+
+
+                                <a
+                                    href="{% url 'exam_delete' exam.id %}"
+                                    class="delete-btn"
+                                >
+                                    Delete
+                                </a>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    {% else %}
+
+        <div class="empty-state">
+
+            <h3>
+                No examinations scheduled
+            </h3>
+
+            <p>
+                No exams have been created yet.
+            </p>
+
+
+            <a
+                href="{% url 'exam_create' %}"
+                class="btn btn-primary"
+            >
+                + Schedule First Exam
+            </a>
+
+        </div>
+
+    {% endif %}
+
+
+</div>
+
+{% endblock %}

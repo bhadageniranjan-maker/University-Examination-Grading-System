@@ -1,0 +1,180 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Login | University Examination System
+    </title>
+
+
+    <link
+        rel="stylesheet"
+        href="{% static 'academics/css/style.css' %}"
+    >
+
+</head>
+
+
+<body class="login-page">
+
+
+<div class="login-container">
+
+
+    <div class="login-card">
+
+
+        <!-- =================================================
+             LOGIN HEADER
+             ================================================= -->
+
+        <div class="login-header">
+
+            <div class="login-icon">
+                🎓
+            </div>
+
+            <h1>
+                University Examination System
+            </h1>
+
+            <p>
+                Academic Management Portal
+            </p>
+
+        </div>
+
+
+
+        <!-- =================================================
+             LOGIN FORM
+             ================================================= -->
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+
+            {% if form.errors %}
+
+                <div class="login-error">
+
+                    Invalid username or password.
+
+                    Please try again.
+
+                </div>
+
+            {% endif %}
+
+
+
+            <!-- USERNAME -->
+
+            <div class="form-group">
+
+                <label for="id_username">
+                    Username
+                </label>
+
+                <input
+                    type="text"
+                    name="username"
+                    id="id_username"
+                    placeholder="Enter your username"
+                    autocomplete="username"
+                    required
+                >
+
+            </div>
+
+
+
+            <!-- PASSWORD -->
+
+            <div class="form-group">
+
+                <label for="id_password">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    name="password"
+                    id="id_password"
+                    placeholder="Enter your password"
+                    autocomplete="current-password"
+                    required
+                >
+
+            </div>
+
+
+
+            <!-- NEXT URL -->
+
+            {% if next %}
+
+                <input
+                    type="hidden"
+                    name="next"
+                    value="{{ next }}"
+                >
+
+            {% endif %}
+
+
+
+            <!-- LOGIN BUTTON -->
+
+            <button
+                type="submit"
+                class="login-button"
+            >
+
+                Login
+
+            </button>
+
+
+        </form>
+
+
+
+        <!-- =================================================
+             LOGIN FOOTER
+             ================================================= -->
+
+        <div class="login-footer">
+
+            <p>
+                University Examination & Grading System
+            </p>
+
+            <p>
+                Version 1.0
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+</body>
+
+</html>

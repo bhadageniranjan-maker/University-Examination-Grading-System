@@ -25,7 +25,10 @@ Departments
 
     <div>
 
-        <a href="{% url 'department_create' %}" class="btn btn-primary">
+        <a
+            href="{% url 'department_create' %}"
+            class="btn btn-primary"
+        >
             + Add Department
         </a>
 
@@ -33,10 +36,6 @@ Departments
 
 </div>
 
-
-<!-- =====================================================
-     DEPARTMENT TABLE
-     ===================================================== -->
 
 <div class="table-container">
 
@@ -47,13 +46,9 @@ Departments
             <tr>
 
                 <th>#</th>
-
                 <th>Department Name</th>
-
                 <th>Code</th>
-
                 <th>Description</th>
-
                 <th>Actions</th>
 
             </tr>
@@ -67,14 +62,10 @@ Departments
 
             <tr>
 
-                <!-- Serial Number -->
-
                 <td>
                     {{ forloop.counter }}
                 </td>
 
-
-                <!-- Department Name -->
 
                 <td>
 
@@ -85,8 +76,6 @@ Departments
                 </td>
 
 
-                <!-- Department Code -->
-
                 <td>
 
                     <span class="badge">
@@ -96,8 +85,6 @@ Departments
                 </td>
 
 
-                <!-- Description -->
-
                 <td>
 
                     {% if department.description %}
@@ -106,7 +93,7 @@ Departments
 
                     {% else %}
 
-                        <span>
+                        <span class="muted-text">
                             No description available
                         </span>
 
@@ -115,13 +102,10 @@ Departments
                 </td>
 
 
-                <!-- Actions -->
-
                 <td>
 
                     <div class="action-buttons">
 
-                        <!-- EDIT -->
 
                         <a
                             href="{% url 'department_edit' department.pk %}"
@@ -131,17 +115,26 @@ Departments
                         </a>
 
 
-                        <!-- DELETE -->
-
-                        <a
-                            href="{% url 'department_delete' department.pk %}"
-                            class="btn btn-delete"
-                            onclick="return confirm(
-                                'Are you sure you want to delete this department?'
-                            );"
+                        <form
+                            method="POST"
+                            action="{% url 'department_delete' department.pk %}"
+                            class="delete-form"
                         >
-                            Delete
-                        </a>
+
+                            {% csrf_token %}
+
+                            <button
+                                type="submit"
+                                class="btn btn-delete"
+                                onclick="return confirm(
+                                    'Are you sure you want to delete this department?'
+                                );"
+                            >
+                                Delete
+                            </button>
+
+                        </form>
+
 
                     </div>
 
@@ -152,13 +145,12 @@ Departments
 
             {% empty %}
 
-            <!-- =================================================
-                 NO DEPARTMENTS
-                 ================================================= -->
-
             <tr>
 
-                <td colspan="5">
+                <td
+                    colspan="5"
+                    class="empty-cell"
+                >
 
                     <div class="empty-state">
 
