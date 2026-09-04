@@ -38,9 +38,14 @@ DATABASES = {
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = [
+    "university-examination-grading-system-production.up.railway.app",
+    "localhost",
+    "127.0.0.1",
+]
+
 CSRF_TRUSTED_ORIGINS = [
-    "https://yourapp-production.up.railway.app",
+    "https://university-examination-grading-system-production.up.railway.app",
 ]
 
 # Application definition
